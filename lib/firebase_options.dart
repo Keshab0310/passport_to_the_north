@@ -41,48 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBoshQ-C5_yre6dQHMmcxkGZ9brifyENS8',
-    appId: '1:124812759209:web:3ba4261724d3d6a415d9b8',
-    messagingSenderId: '124812759209',
-    projectId: 'passport-to-the-north-9262b',
-    authDomain: 'passport-to-the-north-9262b.firebaseapp.com',
-    storageBucket: 'passport-to-the-north-9262b.firebasestorage.app',
-    measurementId: 'G-H1LTRC65PS',
+    apiKey: 'AIzaSyAxckMPAi10vlXI_8_t7J8aixzkKkviQDo',
+    appId: '1:324508338106:web:f353ffdf02530a3cc93f83',
+    messagingSenderId: '324508338106',
+    projectId: 'passport-to-the-north-95784',
+    authDomain: 'passport-to-the-north-95784.firebaseapp.com',
+    storageBucket: 'passport-to-the-north-95784.firebasestorage.app',
+    measurementId: 'G-K5FNR3W09Q',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyACFupN5mXlZ3VlzSexl3XJ-pF6KqfCmDM',
-    appId: '1:124812759209:android:3e1a911a5fb9909515d9b8',
-    messagingSenderId: '124812759209',
-    projectId: 'passport-to-the-north-9262b',
-    storageBucket: 'passport-to-the-north-9262b.firebasestorage.app',
+    apiKey: 'AIzaSyBScVrFBsHj2zpBt80r52IZPLV1wZ4zlJ0',
+    appId: '1:324508338106:android:5b03aa988e2039c2c93f83',
+    messagingSenderId: '324508338106',
+    projectId: 'passport-to-the-north-95784',
+    storageBucket: 'passport-to-the-north-95784.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyChqB8NFfXnfaBkgGGpv0lnKuPtusqwMdE',
-    appId: '1:124812759209:ios:88faaf0ff6f54efc15d9b8',
-    messagingSenderId: '124812759209',
-    projectId: 'passport-to-the-north-9262b',
-    storageBucket: 'passport-to-the-north-9262b.firebasestorage.app',
+    apiKey: 'AIzaSyDQ7sTW3SYi5DB7VGWtj98KXcJNO1B7dcg',
+    appId: '1:324508338106:ios:5f73cef472323679c93f83',
+    messagingSenderId: '324508338106',
+    projectId: 'passport-to-the-north-95784',
+    storageBucket: 'passport-to-the-north-95784.firebasestorage.app',
     iosBundleId: 'com.example.passportToTheNorth',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyChqB8NFfXnfaBkgGGpv0lnKuPtusqwMdE',
-    appId: '1:124812759209:ios:88faaf0ff6f54efc15d9b8',
-    messagingSenderId: '124812759209',
-    projectId: 'passport-to-the-north-9262b',
-    storageBucket: 'passport-to-the-north-9262b.firebasestorage.app',
+    apiKey: 'AIzaSyDQ7sTW3SYi5DB7VGWtj98KXcJNO1B7dcg',
+    appId: '1:324508338106:ios:5f73cef472323679c93f83',
+    messagingSenderId: '324508338106',
+    projectId: 'passport-to-the-north-95784',
+    storageBucket: 'passport-to-the-north-95784.firebasestorage.app',
     iosBundleId: 'com.example.passportToTheNorth',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBoshQ-C5_yre6dQHMmcxkGZ9brifyENS8',
-    appId: '1:124812759209:web:8e9cfc0d215a80e015d9b8',
-    messagingSenderId: '124812759209',
-    projectId: 'passport-to-the-north-9262b',
-    authDomain: 'passport-to-the-north-9262b.firebaseapp.com',
-    storageBucket: 'passport-to-the-north-9262b.firebasestorage.app',
-    measurementId: 'G-NXFRBLR9LM',
+    apiKey: 'AIzaSyAxckMPAi10vlXI_8_t7J8aixzkKkviQDo',
+    appId: '1:324508338106:web:7570d02ea4f74334c93f83',
+    messagingSenderId: '324508338106',
+    projectId: 'passport-to-the-north-95784',
+    authDomain: 'passport-to-the-north-95784.firebaseapp.com',
+    storageBucket: 'passport-to-the-north-95784.firebasestorage.app',
+    measurementId: 'G-5HXHZLGKQP',
   );
+
 }
