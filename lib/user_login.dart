@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'map_page.dart';
+import 'package:passport_to_the_north/home_page.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
   Duration get loginTime => const Duration(milliseconds: 2250);
@@ -64,7 +64,7 @@ class LoginPage extends StatelessWidget {
           // Navigate to MapNavigationPage upon successful login
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const MapNavigationPage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         }
         return result;

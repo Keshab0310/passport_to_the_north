@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:passport_to_the_north/pages/user_login.dart';
+import 'package:passport_to_the_north/user_login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures binding for async code
