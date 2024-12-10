@@ -1,150 +1,169 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// lib/pages/login_page.dart
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_login/flutter_login.dart';
+
+// Import necessary models and pages
+import 'package:passport_to_the_north/models/user_model.dart';
 import 'package:passport_to_the_north/pages/home_page.dart';
-import 'package:passport_to_the_north/Widgets/user_model.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String?> _authUser(LoginData data) async {
+  // Login Method
+  Future<String?> _loginUser(LoginData loginData) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: data.name,
-        password: data.password,
+      // Attempt Firebase Authentication
+      final userCredential = await fb_auth.FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+        email: loginData.name,
+        password: loginData.password,
       );
 
-      final userDoc = await _firestore.collection('users').doc(userCredential.user!.uid).get();
+      // Fetch user details from Firestore
+      final userDoc = await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .get();
 
       if (!userDoc.exists) {
-        return 'No user data found in Firestore.';
+        return 'User data not found';
       }
 
-      debugPrint("User data: ${userDoc.data()}");
-      return null;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return 'No user found for that email.';
-      } else if (e.code == 'wrong-password') {
-        return 'Incorrect password.';
+      return null; // Successful login
+    } on fb_auth.FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          return 'No user found with this email';
+        case 'wrong-password':
+          return 'Incorrect password';
+        default:
+          return 'Login failed: ${e.message}';
       }
-      return e.message;
     }
   }
 
-  Future<String?> _authSignup(SignupData data) async {
-    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(data.name!)) {
-      return 'Enter a valid email.';
-    }
-    if (data.password!.length < 6) {
-      return 'Password should be at least 6 characters.';
-    }
+  // Signup Method
+  Future<String?> _signupUser(SignupData signupData) async {
     try {
-      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: data.name!,
-        password: data.password!,
+      // Validate email
+      if (!_isValidEmail(signupData.name ?? '')) {
+        return 'Invalid email format';
+      }
+
+      // Validate password
+      if ((signupData.password ?? '').length < 6) {
+        return 'Password must be at least 6 characters';
+      }
+
+      // Create user in Firebase Authentication
+      final userCredential = await fb_auth.FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: signupData.name!,
+        password: signupData.password!,
       );
 
-      final userDoc = FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid);
-
-      await userDoc.set({
+      // Create user document in Firestore
+      await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
         'uid': userCredential.user!.uid,
-        'email': data.name!,
-        'username': data.additionalSignupData?['username'] ?? 'Anonymous',
-        'createdAt': FieldValue.serverTimestamp(),
+        'email': signupData.name,
+        'username': signupData.additionalSignupData?['username'] ?? 'Explorer',
         'currentExp': 0,
         'totalExp': 1000,
-        'league': League.bronze.toString().split('.').last,
+        'league': League.bronze.name,
+        'createdAt': FieldValue.serverTimestamp(),
       });
 
-      return null;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        return 'This email is already registered.';
+      return null; // Successful signup
+    } on fb_auth.FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'email-already-in-use':
+          return 'Email already registered';
+        default:
+          return 'Signup failed: ${e.message}';
       }
-      return e.message;
-    } catch (e) {
-      return 'An error occurred. Please try again later.';
     }
   }
 
-  Future<String?> _recoverPassword(String name) async {
+  // Password Recovery Method
+  Future<String?> _recoverPassword(String email) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: name);
-      return 'Password reset email sent!';
+      await fb_auth.FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return 'Password reset email sent';
     } catch (e) {
-      return 'Failed to send password reset email.';
+      return 'Password reset failed';
+    }
+  }
+
+  // Email Validation Method
+  bool _isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+  }
+
+  // Navigate to HomePage after successful login
+  void _navigateToHomePage(BuildContext context) async {
+    final currentUser = fb_auth.FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      final userDoc = await _firestore
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+
+      if (userDoc.exists) {
+        final appUser = AppUser(
+          id: currentUser.uid,
+          username: userDoc['username'],
+          email: currentUser.email!,
+          currentExp: userDoc['currentExp'],
+          totalExp: userDoc['totalExp'],
+          league: League.values.byName(userDoc['league']),
+        );
+
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomePage(user: appUser),
+          ),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FlutterLogin(
-      title: 'Welcome to the North',
-      logo: "assets/logo.jpg",
-      onLogin: (LoginData data) async {
-            final result = await _authUser(data);
-            if (result == null) {
-              AppUser? currentUser;
-              try {
-                final firebaseUser = FirebaseAuth.instance.currentUser;
-                if (firebaseUser != null) {
-                  final docSnapshot = await FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(firebaseUser.uid)
-                      .get();
-
-                  if (docSnapshot.exists) {
-                    currentUser = User(
-                      id: docSnapshot.id,
-                      username: docSnapshot['username'] as String,
-                      email: docSnapshot['email'] as String,
-                      currentExp: docSnapshot['currentExp'] as int,
-                      totalExp: docSnapshot['totalExp'] as int,
-                      league: League.values.firstWhere(
-                              (e) => e.toString().split('.').last == docSnapshot['league']
-                      ),
-                    );
-
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(user: currentUser!),
-                      ),
-                    );
-                  }
-                }
-              } catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error fetching user data: ${e.toString()}')),
-            );
-          }
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(result)),
-          );
-        }
-        return result;
-      },
-      onSignup: _authSignup,
-      onRecoverPassword: _recoverPassword,
-      additionalSignupFields: const [
-        UserFormField(
-          keyName: 'username',
-          displayName: 'Username',
-          icon: Icon(Icons.person),
-        ),
-      ],
-      theme: LoginTheme(
-        primaryColor: Colors.brown,
-        accentColor: Colors.yellow,
-        titleStyle: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.yellow,
+    return Scaffold(
+      body: FlutterLogin(
+        title: 'Passport to the North',
+        logo: const AssetImage('assets/logo.jpg'), // Make sure to add your logo
+        onLogin: _loginUser,
+        onSignup: _signupUser,
+        onRecoverPassword: _recoverPassword,
+        additionalSignupFields: const [
+          UserFormField(
+            keyName: 'username',
+            displayName: 'Username',
+            icon:  Icon(Icons.person),
+          ),
+        ],
+        onSubmitAnimationCompleted: () => _navigateToHomePage(context),
+        theme: LoginTheme(
+          primaryColor: Colors.brown,
+          accentColor: Colors.yellow,
+          titleStyle: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.yellow,
+          ),
         ),
       ),
     );

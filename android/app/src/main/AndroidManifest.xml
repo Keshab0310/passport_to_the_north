@@ -1,31 +1,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.passport_to_the_north"> <!-- Use your app's package name -->
-    <uses-permission android:name="android.permission.INTERNET" />
+    package="com.example.passport_to_the_north"
+    android:versionCode="1"
+    android:versionName="1.0.0">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:label="passport_to_the_north"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/LaunchTheme"
-        android:exported="true"
-        android:enableOnBackInvokedCallback="true">
+        android:exported="true">
 
-        <!-- Specify MainActivity with the correct package name -->
+        <!-- Main activity -->
         <activity
             android:name="com.example.passport_to_the_north.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:taskAffinity=""
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
+            android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize">
 
-            <!-- Android theme while Flutter initializes -->
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
                 android:resource="@style/NormalTheme" />
 
-            <!-- Main launcher intent -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,13 +34,12 @@
             </intent-filter>
         </activity>
 
-        <!-- Flutter plugin meta-data -->
+        <!-- Flutter embedding -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
 
-    <!-- Allow querying activities -->
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT" />

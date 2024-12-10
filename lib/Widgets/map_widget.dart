@@ -7,6 +7,9 @@ class MapWidget extends StatelessWidget {
   final double initialZoom;
   final Function(LatLng) onTapMarker;
   final List<Marker> markers;
+  final String mapboxAccessToken = 'pk.eyJ1Ijoia2VzaGFiOTkiLCJhIjoiY200ODBhNTh5MGJ6OTJrb3NzcTQ0ODgxbCJ9.bOzGye56v0wauOuA-keiHg';
+  final String mapboxStyle = 'mapbox/navigation-night-v1'; // Change style if needed
+
 
   const MapWidget({
     super.key,
@@ -26,8 +29,12 @@ class MapWidget extends StatelessWidget {
       ),
       children: [
         TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          subdomains: ['a', 'b', 'c'],
+          urlTemplate:
+          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+          additionalOptions: {
+            'id' : mapboxStyle,
+            'accessToken': mapboxAccessToken,
+          },
         ),
         MarkerLayer(
           markers: markers,

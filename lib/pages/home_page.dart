@@ -1,19 +1,19 @@
-// lib/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:passport_to_the_north/Widgets/user_model.dart';
-import 'package:passport_to_the_north/Widgets/exp_bar.dart';
-import 'package:passport_to_the_north/Widgets/floating_action_button.dart';
-import 'package:passport_to_the_north/Widgets/floating_action_button.dart';
+import 'package:passport_to_the_north/models/user_model.dart';
+import 'package:passport_to_the_north/widgets/exp_bar.dart';
+import 'package:passport_to_the_north/widgets/floating_action_button.dart';
+import 'package:passport_to_the_north/Widgets/buttom_nav_bar.dart';
 import 'package:passport_to_the_north/widgets/map_widget.dart';
 import 'package:passport_to_the_north/widgets/search_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
+import 'package:passport_to_the_north/pages/user_login.dart';
 
 class HomePage extends StatefulWidget {
-  final AppUser user;  // Changed from User to AppUser
+  final AppUser user;
   const HomePage({super.key, required this.user});
 
   @override
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   var markers = <Marker>[];
   bool _isLoading = false;
 
-  late AppUser _currentUser;  // Changed from User to AppUser
+  late AppUser _currentUser;
 
   @override
   void initState() {
@@ -35,7 +35,120 @@ class _HomePageState extends State<HomePage> {
     _getCurrentLocation();
   }
 
-  // Rest of the code remains the same as your original implementation
+  // Location Services Method
+  Future<void> _getCurrentLocation() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+
+      if (permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always) {
+        Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+        );
+
+        setState(() {
+          mapCenter = LatLng(position.latitude, position.longitude);
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      _showErrorSnackBar('Error getting location: ${e.toString()}');
+    }
+  }
+
+  // Search Handler
+  void _handleSearch(String query) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Searching for $query...')),
+    );
+  }
+
+  // Marker Tap Handler
+  void _handleMarkerTap(LatLng point) {
+    setState(() {
+      markers.add(Marker(
+        point: point,
+        child: const Icon(Icons.location_pin, color: Colors.red, size: 40),
+      ));
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Marker added at ${point.latitude}, ${point.longitude}"),
+        action: SnackBarAction(
+            label: 'Navigate',
+            onPressed: () {
+              // Optional: Add navigation logic
+            }
+        ),
+      ),
+    );
+  }
+
+  // Navigation Handler
+  void _handleNavigation() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Navigating to nearby points...')),
+    );
+  }
+
+  // Logout Method
+  void _logout() async {
+    try {
+      await fb_auth.FirebaseAuth.instance.signOut();
+      // Navigate back to login page
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
+    } catch (e) {
+      _showErrorSnackBar('Logout failed: ${e.toString()}');
+    }
+  }
+
+  // Error SnackBar Method
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  // Experience Update Method
+  void _updateUserExperience(int expGained) {
+    setState(() {
+      _currentUser.updateExperience(expGained);
+    });
+
+    // Update Firestore with new experience
+    _updateUserInFirestore();
+  }
+
+  // Firestore User Update Method
+  Future<void> _updateUserInFirestore() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(_currentUser.id)
+          .update({
+        'currentExp': _currentUser.currentExp,
+        'totalExp': _currentUser.totalExp,
+        'league': _currentUser.league.toString().split('.').last,
+      });
+    } catch (e) {
+      _showErrorSnackBar('Error updating user experience');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

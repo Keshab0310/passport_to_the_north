@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:passport_to_the_north/user_login.dart';
+import 'package:passport_to_the_north/pages/user_login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures binding for async code
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Firebase App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const LoginPage(), // Replace with your login page class
+      home: LoginPage(), // Replace with your login page class
     );
   }
 }

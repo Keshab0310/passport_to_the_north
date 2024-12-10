@@ -3,40 +3,64 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class InitialMapWidget extends StatelessWidget {
-  final LatLng initialCenter;
+class InitialMapWidget extends StatefulWidget {
+  final LatLng? initialCenter;
   final double initialZoom;
-  final String attributionUrl;
+  final String mapboxAccessToken;
 
   const InitialMapWidget({
     super.key,
-    required this.initialCenter,
-    this.initialZoom = 9.2,
-    this.attributionUrl = 'https://openstreetmap.org/copyright',
+    this.initialCenter,
+    this.initialZoom = 18,
+    required this.mapboxAccessToken,
   });
+
+  @override
+  _InitialMapWidgetState createState() => _InitialMapWidgetState();
+}
+
+class _InitialMapWidgetState extends State<InitialMapWidget> {
+  late LatLng _center;
+  late double _zoom;
+
+  @override
+  void initState() {
+    super.initState();
+    // Default to a fallback location if no initial center is provided
+    _center = widget.initialCenter ?? const LatLng(46.495633 , -80.9988953);
+    _zoom = widget.initialZoom;
+  }
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-        initialCenter: initialCenter,
-        initialZoom: initialZoom,
+        initialCenter: _center,
+        initialZoom: _zoom,
+        minZoom: 9,
+        maxZoom: 18,
       ),
       children: [
-        // Tile Layer using OpenStreetMap
         TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          urlTemplate:
+          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+          additionalOptions: {
+            'accessToken': widget.mapboxAccessToken,
+          },
           userAgentPackageName: 'com.example.passport_to_the_north',
+          tileBuilder: (context, exception, stackTrace) {
+            return Container(
+              color: Colors.red,
+              child: const Center(
+                child: Text(
+                  'Error loading map tile',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            );
+          },
         ),
-        // Rich Attribution Widget for OSM credits
-        RichAttributionWidget(
-          attributions: [
-            TextSourceAttribution(
-              'OpenStreetMap contributors',
-              onTap: () => launchUrl(Uri.parse(attributionUrl)),
-            ),
-          ],
-        ),
+        // Attribution Widget (optional for Mapbox)
       ],
     );
   }

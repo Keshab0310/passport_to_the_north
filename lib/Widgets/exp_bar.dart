@@ -1,54 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:passport_to_the_north/models/user_model.dart';
 
 class ExpProgressBar extends StatelessWidget {
   final int currentExp;
   final int totalExp;
-  final int level;
+  final League league;
 
   const ExpProgressBar({
-    super.key,
+    Key? key,
     required this.currentExp,
     required this.totalExp,
-    required this.level,
-  });
+    required this.league,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    double progressValue = currentExp / totalExp;
+
+    return Container(
+      padding: const EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "EXP Progress: Level $level",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            'League: ${league.toString().split('.').last.toUpperCase()}',
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 5),
-          Stack(
-            children: [
-              Container(
-                height: 20,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              FractionallySizedBox(
-                widthFactor: currentExp / totalExp,
-                child: Container(
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ],
+          LinearProgressIndicator(
+            value: progressValue,
+            backgroundColor: Colors.grey[300],
+            valueColor: AlwaysStoppedAnimation<Color>(
+              _getLeagueColor(league),
+            ),
           ),
-          const SizedBox(height: 5),
-          Text("$currentExp / $totalExp EXP"),
+          Text('$currentExp / $totalExp XP'),
         ],
       ),
     );
+  }
+
+  Color _getLeagueColor(League league) {
+    switch (league) {
+      case League.bronze:
+        return Colors.brown;
+      case League.silver:
+        return Colors.grey;
+      case League.gold:
+        return Colors.amber;
+    }
   }
 }

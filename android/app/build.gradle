@@ -8,6 +8,7 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
+
 android {
     namespace = "com.example.passport_to_the_north"
     compileSdk = flutter.compileSdkVersion
@@ -26,7 +27,8 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.passport_to_the_north"
         // Explicitly set minSdkVersion to 23 as required by the firebase_auth plugin.
-        minSdkVersion = 23  // <-- Set explicitly
+        //noinspection GradleIdeError,GradleIdeError
+        minSdkVersion 23  // <-- Set explicitly
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
