@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:north/locations_screen.dart'; // Import the LocationsScreen file
+import 'package:passsport_to_the_north/location_details_screen.dart'; // Import the LocationDetailsScreen
 
 class QuestScreen extends StatelessWidget {
   const QuestScreen({super.key});
