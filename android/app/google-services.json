@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "124812759209",
-    "project_id": "passport-to-the-north-9262b",
-    "storage_bucket": "passport-to-the-north-9262b.firebasestorage.app"
+    "project_number": "324508338106",
+    "project_id": "passport-to-the-north-95784",
+    "storage_bucket": "passport-to-the-north-95784.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:124812759209:android:3e1a911a5fb9909515d9b8",
+        "mobilesdk_app_id": "1:324508338106:android:5b03aa988e2039c2c93f83",
         "android_client_info": {
-          "package_name": "com.theenactus.passport_to_the_north"
+          "package_name": "com.example.passport_to_the_north"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyACFupN5mXlZ3VlzSexl3XJ-pF6KqfCmDM"
+          "current_key": "AIzaSyBScVrFBsHj2zpBt80r52IZPLV1wZ4zlJ0"
         }
       ],
       "services": {
