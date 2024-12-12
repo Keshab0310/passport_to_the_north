@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pages/progress_page.dart';
-
+import 'package:passport_to_the_north/pages/quest.dart';
 class DrawerNavWithIndex extends StatelessWidget {
   final String username;
   final String email;
@@ -32,8 +31,8 @@ class DrawerNavWithIndex extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text("Home"),
+            leading: const Icon(Icons.home),
+            title: const Text("Home"),
             selected: currentIndex == 0,
             onTap: () {
               onItemSelected(0);
@@ -41,29 +40,29 @@ class DrawerNavWithIndex extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.task),
-            title: Text("Quests"),
+            leading: const Icon(Icons.task),
+            title: const Text("Quests"),
             selected: currentIndex == 1,
-            onTap: () {
-              onItemSelected(1);
-              Navigator.pop(context); // Close the drawer
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.emoji_events),
-            title: Text("Progress"),
-            selected: currentIndex == 2,
             onTap: () {
               Navigator.pop(context); // Close the drawer
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProgressPage()),
-              );
+                  context,
+                  MaterialPageRoute(builder: (context) => const QuestScreen())
+              ); // Close the drawer
             },
           ),
           ListTile(
-            leading: Icon(Icons.inventory),
-            title: Text("Inventory"),
+            leading: const Icon(Icons.emoji_events),
+            title: const Text("Progress"),
+            selected: currentIndex == 2,
+            onTap: () {
+              onItemSelected(2);
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.inventory),
+            title: const Text("Inventory"),
             selected: currentIndex == 3,
             onTap: () {
               onItemSelected(3);
