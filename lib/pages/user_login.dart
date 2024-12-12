@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:passport_to_the_north/Widgets/drawer_navigation.dart';
 
 // Import necessary models and pages
 import 'package:passport_to_the_north/models/user_model.dart';
@@ -132,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
 
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomePage(user: appUser),
+            builder: (context) => HomePage(user: appUser), // Change this line
           ),
         );
       }
