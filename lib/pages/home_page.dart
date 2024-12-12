@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:passport_to_the_north/models/user_model.dart';
 import 'package:passport_to_the_north/widgets/exp_bar.dart';
 import 'package:passport_to_the_north/widgets/floating_action_button.dart';
-import 'package:passport_to_the_north/Widgets/buttom_nav_bar.dart';
+import 'package:passport_to_the_north/widgets/drawer_navigation.dart';
 import 'package:passport_to_the_north/widgets/map_widget.dart';
 import 'package:passport_to_the_north/widgets/search_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
@@ -14,6 +14,7 @@ import 'package:passport_to_the_north/pages/user_login.dart';
 
 class HomePage extends StatefulWidget {
   final AppUser user;
+
   const HomePage({super.key, required this.user});
 
   @override
@@ -88,8 +89,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Navigate',
             onPressed: () {
               // Optional: Add navigation logic
-            }
-        ),
+            }),
       ),
     );
   }
@@ -150,6 +150,12 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _onItemSelected(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,24 +204,12 @@ class _HomePageState extends State<HomePage> {
         onPressed: _handleNavigation,
       ),
 
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavBar(
+      // Drawer Navigation
+      drawer: DrawerNavWithIndex(
+        username: _currentUser.username,
+        email: _currentUser.email,
         currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() => currentIndex = index);
-          // Add navigation logic based on index if needed
-          switch (index) {
-            case 0:
-            // Home page (current page)
-              break;
-            case 1:
-            // Maybe achievements or profile page
-              break;
-            case 2:
-            // Maybe settings or other functionality
-              break;
-          }
-        },
+        onItemSelected: _onItemSelected,
       ),
     );
   }
