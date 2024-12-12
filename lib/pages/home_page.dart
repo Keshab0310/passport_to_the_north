@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.brown,
         title: Text("${_currentUser.username}'s Exploration"),
         actions: [
           IconButton(

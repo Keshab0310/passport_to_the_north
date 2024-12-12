@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passport_to_the_north/pages/quest.dart';
+import 'package:passport_to_the_north/pages/progress.dart';
+
 class DrawerNavWithIndex extends StatelessWidget {
   final String username;
   final String email;
@@ -56,8 +58,11 @@ class DrawerNavWithIndex extends StatelessWidget {
             title: const Text("Progress"),
             selected: currentIndex == 2,
             onTap: () {
-              onItemSelected(2);
-              Navigator.pop(context);
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProgressPage())
+              );
             },
           ),
           ListTile(

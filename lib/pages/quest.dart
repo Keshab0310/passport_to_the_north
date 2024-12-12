@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:passport_to_the_north/pages/location_details_screen.dart';
 import 'locations_screen.dart'; // Import the LocationDetailsScreen
 
 class QuestScreen extends StatelessWidget {
@@ -39,8 +40,8 @@ class QuestScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LocationsScreen(
-                        category: category['name']!,
+                      builder: (context) => LocationDetailsScreen(
+                        categoryName: category['name']!,
                       ),
                     ),
                   );
