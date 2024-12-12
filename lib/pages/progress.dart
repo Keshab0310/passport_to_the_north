@@ -14,7 +14,8 @@ class _ProgressPageState extends State<ProgressPage> {
   final Color primaryBrown = Color(0xFF795548);
   final Color accentBrown = Color(0xFF8B4513);
   final Color lightGreen = Color(0xFF9E9D24);
-  final Color backgroundNeutral = Color(0xFFFFF9C4);
+  final Color lightBrown = Color(0xFFD7CCC8);
+  final Color lightYellow = Color(0xFFFFFDE7);
 
   // Medal Colors
   final Color bronzeColor = Color(0xFFCD7F32);
@@ -38,6 +39,7 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget _buildProgressCard() {
     return Card(
       elevation: 4,
+      color: lightYellow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -49,7 +51,7 @@ class _ProgressPageState extends State<ProgressPage> {
             Text(
               'Progress',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: primaryBrown,
               ),
@@ -101,6 +103,7 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget _buildAchievementsSection() {
     return Card(
       elevation: 4,
+      color: lightYellow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -112,7 +115,7 @@ class _ProgressPageState extends State<ProgressPage> {
             Text(
               'Achievements',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: primaryBrown,
               ),
@@ -145,6 +148,7 @@ class _ProgressPageState extends State<ProgressPage> {
   Widget _buildChallengesSection() {
     return Card(
       elevation: 4,
+      color: lightYellow,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -156,7 +160,7 @@ class _ProgressPageState extends State<ProgressPage> {
             Text(
               'Daily Challenges',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: primaryBrown,
               ),
@@ -322,12 +326,13 @@ class _ProgressPageState extends State<ProgressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundNeutral,
+      backgroundColor: lightBrown,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'My Progress',
           style: TextStyle(
-            color: Colors.white,
+            fontSize: 26,
+            color: Colors.yellow,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -347,8 +352,9 @@ class _ProgressPageState extends State<ProgressPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildProgressCard(),
-              SizedBox(height: 20),
+              const SizedBox(height: 13),
               _buildAchievementsSection(),
+              const SizedBox(height: 13),
               _buildChallengesSection()
             ],
           ),
