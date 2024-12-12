@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import '../pages/progress_page.dart';
+
+class DrawerNavWithIndex extends StatelessWidget {
+  final String username;
+  final String email;
+  final int currentIndex;
+  final Function(int) onItemSelected;
+
+  const DrawerNavWithIndex({
+    super.key,
+    required this.username,
+    required this.email,
+    required this.currentIndex,
+    required this.onItemSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text(username),
+            accountEmail: Text(email),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+              child: Text(username.isNotEmpty
+                  ? username[0].toUpperCase()
+                  : ''),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("Home"),
+            selected: currentIndex == 0,
+            onTap: () {
+              onItemSelected(0);
+              Navigator.pop(context); // Close the drawer
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.task),
+            title: Text("Quests"),
+            selected: currentIndex == 1,
+            onTap: () {
+              onItemSelected(1);
+              Navigator.pop(context); // Close the drawer
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.emoji_events),
+            title: Text("Progress"),
+            selected: currentIndex == 2,
+            onTap: () {
+              Navigator.pop(context); // Close the drawer
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProgressPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.inventory),
+            title: Text("Inventory"),
+            selected: currentIndex == 3,
+            onTap: () {
+              onItemSelected(3);
+              Navigator.pop(context); // Close the drawer
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
