@@ -1,5 +1,7 @@
 # Passport to The North
 ![Logo](assets/logo.jpg)
+
+
 A mobile application that blends exploration, gamification, and technonology to enhance travel experiences in Northern Ontario.
 
 # Project Overview
