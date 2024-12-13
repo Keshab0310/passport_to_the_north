@@ -104,12 +104,12 @@ class LocationDetailsScreen extends StatelessWidget {
       return [
         {
           'name': 'Halfway Lake Provincial Park',
-          'image': 'assets/provincial_park.jpg',
+          'image': 'assets/halfway_provincial_park.jpg',
           'description': 'Halfway Lake Provincial Park is perfect for day hikes, multiday hiking trips, and canoeing. There are also two beaches with great swimming opportunities for families. There are four hiking trails at Halfway Lake Provincial Park and two canoeing routes.'},
 
         {
           'name': 'Killarney Provincial Park',
-          'image': 'assets/provincial_park.jpg',
+          'image': 'assets/killarney_park.jpg',
           'description': 'one of the best places to go hiking in Ontario, most famous for its stunning scenery. Soak up views of the La Cloche Mountains, coastlines dripping in pink granite, and over 50 crystal clear sapphire lakes. For hikers looking for a lengthy journey, there’s the 80km La Cloche Silhouette Trail that could take up to a week to hike. If you’re going to Killarney Provincial Park, you absolutely need to hike the Crack trail. It’s a little bit of a scramble up those rocks, but the panoramic viewpoint at the top is well worth it.'
         },
       ];
