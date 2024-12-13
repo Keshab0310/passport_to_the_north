@@ -11,6 +11,7 @@ import 'package:passport_to_the_north/widgets/map_widget.dart';
 import 'package:passport_to_the_north/widgets/search_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:passport_to_the_north/pages/user_login.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   final AppUser user;
@@ -23,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  LatLng mapCenter = const LatLng(46.493919, -80.995415);
+  LatLng? mapCenter;
   var markers = <Marker>[];
   bool _isLoading = false;
 
@@ -50,8 +51,12 @@ class _HomePageState extends State<HomePage> {
 
       if (permission == LocationPermission.whileInUse ||
           permission == LocationPermission.always) {
+        LocationSettings locationSettings =const LocationSettings(
+          accuracy: LocationAccuracy.best,
+          distanceFilter: 10,
+        );
         Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high,
+          locationSettings: locationSettings,
         );
 
         setState(() {
@@ -68,10 +73,51 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Search Handler
-  void _handleSearch(String query) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Searching for $query...')),
-    );
+  void _handleSearch(String query) async {
+    if (query.trim().isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid search query.')),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // Firestore Query to search for locations
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('locations') // Replace with your Firestore collection name
+          .where('name', isGreaterThanOrEqualTo: query)
+          .where('name', isLessThanOrEqualTo: '$query\uf8ff')
+          .get();
+
+      // Parse results and update markers
+      final newMarkers = querySnapshot.docs.map((doc) {
+        final data = doc.data();
+        return Marker(
+          point: LatLng(data['latitude'], data['longitude']),
+          child: const Icon(Icons.location_pin, color: Colors.blue, size: 40),
+        );
+      }).toList();
+
+      setState(() {
+        markers = newMarkers; // Update map markers
+        _isLoading = false;
+      });
+
+      if (newMarkers.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No matching locations found.')),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      _showErrorSnackBar('Error searching locations: ${e.toString()}');
+    }
   }
 
   // Marker Tap Handler
@@ -95,10 +141,35 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Navigation Handler
-  void _handleNavigation() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigating to nearby points...')),
-    );
+  Future<void> _handleNavigation() async {
+    try {
+      // Fetch the nearest location or any location for testing
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('locations')
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final data = querySnapshot.docs.first.data();
+        final double latitude = data['latitude'];
+        final double longitude = data['longitude'];
+        final String name = data['name'] ?? 'Selected Location';
+
+        final Uri googleMapsUrl = Uri.parse(
+            'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude');
+
+        // Launch Google Maps
+        if (await canLaunchUrl(googleMapsUrl)) {
+          await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
+        } else {
+          _showErrorSnackBar('Could not launch Google Maps');
+        }
+      } else {
+        _showErrorSnackBar('No locations available for navigation.');
+      }
+    } catch (e) {
+      _showErrorSnackBar('Error fetching navigation location: ${e.toString()}');
+    }
   }
 
   // Logout Method
@@ -190,8 +261,8 @@ class _HomePageState extends State<HomePage> {
           // Expandable Map Widget
           Expanded(
             child: MapWidget(
-              initialCenter: mapCenter,
-              initialZoom: 15.0,
+              initialCenter: mapCenter!,
+              initialZoom: 17.0,
               markers: markers,
               onTapMarker: _handleMarkerTap,
             ),
