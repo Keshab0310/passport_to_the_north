@@ -49,53 +49,53 @@ class LocationDetailsScreen extends StatelessWidget {
       return [
         {
           'name': 'Blueberry Hill Trail',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/blueberry_hill.jpg',
           'description': 'Started at the main parking lot (P1) and hiked the Beaver Pond Loop and the Mount Ramsey Trail on the northeast side of the park.This peaceful, natural environment is only a 10 minute drive from downtown Sudbury, so you don’t need to travel far to experience the wilderness. 23km of hiking trails. There’s a variety of scenic views and habitats to discover, like a lake, a pond, wetlands, hiking and nature trails, and birding opportunities.'
         },
         {
           'name': 'Jane Goodall Reclamation Trail',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/jane_goodall.jpg',
           'description': 'is a 1km nature walk from the Coniston Welcome Centre. Logging and smelting of nickel ore caused soil erosion and depletion of vegetation. Thankfully, through the City of Greater Sudbury’s Regreening Program, this area is now a beautiful nature trail for all to enjoy.'
         },
         {
           'name': 'Kelly Lake Trail',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/kelly_lake.jpg',
           'description': 'The first kilometre of the trail is barrier free as it’s a wooden boardwalk. You can continue on Kelly Lake for much farther if you’d like. You can walk for a 4-6km loop, or keep walking for 8 or 9km if you’d like. Start your adventure at Fielding Memorial Park where there’s ample free parking. Then, hike on the south side of Kelly Lake. It’s one of the most amazing Sudbury hiking trails where it’s easy to get immersed with nature."'
         },
         {
           'name': 'Kivi Park',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/kivi_park.jpg',
           'description': 'You can go hiking, biking, skiing, and snowshoeing, depending on the season. During the spring, summer, and fall, there are several hiking trails at Kivi Park of varying lengths.For a longer, scenic trail, follow the red trail (5km). At the southern end of the red trail, you’ll be able to witness amazing lookout points.'
         },
         {
           'name': 'Lake Laurentian Conservation Area',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/lake_laurentian.jpg',
           'description': 'Started at the main parking lot (P1) and hiked the Beaver Pond Loop and the Mount Ramsey Trail on the northeast side of the park.This peaceful, natural environment is only a 10 minute drive from downtown Sudbury, so you don’t need to travel far to experience the wilderness. 23km of hiking trails. There’s a variety of scenic views and habitats to discover, like a lake, a pond, wetlands, hiking and nature trails, and birding opportunities.'
         },
         {
           'name': 'Lily Creek Boardwalk',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/lily_creek_broadwalk.jpg',
           'description': 'The shorter Sudbury hiking trail is a little under 1km, and it’s a lovely little walk on Ramsey Lake around the Science North property. The path starts at the James Jerome Sports Complex. Then, continue your walk as you pass Science North, Lake Ramsey, and pretty little gardens.'
         },
         {
           'name': 'Onaping Falls and the A.Y. Jackson Lookout',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/onnaping_falls.jpg',
           'description': 'The entire trail is around 2km, but it will take a little longer than usual because you will need to navigate across some rocky surfaces and short inclines. The A.Y. Jackson Lookout offers spectacular views of stunning Onaping Falls. This waterfall is like several waterfalls in one, as there are several cascades to see as you walk. Starting at the A.Y. Jackson Welcome Centre, admire the falls from the first lookout point."'
         },
         {
           'name': 'Robinson Lake Trail',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/robinson_lake_trail.jpg',
           'description': 'is a short, 1.3km out and back trail that offers pretty scenery of Robinson Lake and the wetlands. It’s an easy jaunt on paved paths, wooden boardwalks, and grassy terrain. There are multiple entrances from Cranbrook Cr, Arnold St and Nova Dr, and the path connects all three streets.'
         },
         {
           'name': 'Rotary Park Trail (New Sudbury Conservation Area)',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/rotary_trail_park.jpg',
           'description': '"It iss a 3km walking path through Rotary Park, also known as the New Sudbury Conservation Area. You’ll find free parking at the Adanac Ski Hill off Beatrice Street. This is an easy walk on a gravel path, and there’s also a boardwalk trail here, too. This is one of the best Sudbury hiking trails because there’s a gorgeous lookout from the main hiking trail. It’s labeled as the “New Sudbury Lookout”"'
         },
 
         {
           'name': 'Walking Trails in Sudbury: Bell Park Walkway',
-          'image': 'assets/hiking.jpg',
+          'image': 'assets/bell_park.jpg',
           'description': 'The Bell Park Walkway is a paved and boardwalk path that’s barrier free and accessible. It follows the edge of Ramsey Lake, and you’ll be able to see landmarks like gazebos and beaches. You can start at Science North or Elizabeth Street on the north side of the trail. It’s easy to combine a day at the beach with a walk. Plus, it is a Blue Flag Beach, meaning that the water is clean and the beach meets high environmental standards.'
         },
 
