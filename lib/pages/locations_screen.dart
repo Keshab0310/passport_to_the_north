@@ -25,13 +25,13 @@ class _LocationsScreenState extends State<LocationsScreen> {
     final locations = _locationsByCategory[widget.category] ?? [];
     final filteredLocations = locations
         .where((location) =>
-        location.toLowerCase().contains(_searchQuery.toLowerCase()))
+            location.toLowerCase().contains(_searchQuery.toLowerCase()))
         .toList();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.category),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: const Color(0xFF4E342E),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

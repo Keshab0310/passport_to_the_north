@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:passport_to_the_north/Widgets/drawer_navigation.dart';
 
 // Import necessary models and pages
 import 'package:passport_to_the_north/models/user_model.dart';
@@ -23,8 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<String?> _loginUser(LoginData loginData) async {
     try {
       // Attempt Firebase Authentication
-      final userCredential = await fb_auth.FirebaseAuth.instance
-          .signInWithEmailAndPassword(
+      final userCredential =
+          await fb_auth.FirebaseAuth.instance.signInWithEmailAndPassword(
         email: loginData.name,
         password: loginData.password,
       );
@@ -66,17 +65,14 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       // Create user in Firebase Authentication
-      final userCredential = await fb_auth.FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
+      final userCredential =
+          await fb_auth.FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: signupData.name!,
         password: signupData.password!,
       );
 
       // Create user document in Firestore
-      await _firestore
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set({
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': signupData.name,
         'username': signupData.additionalSignupData?['username'] ?? 'Explorer',
@@ -116,10 +112,8 @@ class _LoginPageState extends State<LoginPage> {
   void _navigateToHomePage(BuildContext context) async {
     final currentUser = fb_auth.FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
-      final userDoc = await _firestore
-          .collection('users')
-          .doc(currentUser.uid)
-          .get();
+      final userDoc =
+          await _firestore.collection('users').doc(currentUser.uid).get();
 
       if (userDoc.exists) {
         final appUser = AppUser(
@@ -153,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
           UserFormField(
             keyName: 'username',
             displayName: 'Username',
-            icon:  Icon(Icons.person),
+            icon: Icon(Icons.person),
           ),
         ],
         onSubmitAnimationCompleted: () => _navigateToHomePage(context),

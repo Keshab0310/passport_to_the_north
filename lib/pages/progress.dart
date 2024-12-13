@@ -11,20 +11,13 @@ class ProgressPage extends StatefulWidget {
 
 class _ProgressPageState extends State<ProgressPage> {
   // Color Palette
-  final Color primaryGreen = Color(0xFF2E8B57);
-  final Color primaryYellow = Color(0xFFFFD600);
-  final Color primaryBrown = Color(0xFF795548);
-  final Color accentBrown = Color(0xFF8B4513);
-  final Color lightGreen = Color(0xFF9E9D24);
-  final Color lightBrown = Color(0xFFD7CCC8);
-  final Color lightYellow = Color(0xFFFFFDE7);
-
   final Color primaryGreen = const Color(0xFF2E8B57);
   final Color primaryYellow = const Color(0xFFFFD600);
   final Color primaryBrown = const Color(0xFF795548);
   final Color accentBrown = const Color(0xFF8B4513);
   final Color lightGreen = const Color(0xFF9E9D24);
-  final Color backgroundNeutral = const Color(0xFFFFF9C4);
+  final Color lightBrown = const Color(0xFFD7CCC8);
+  final Color lightYellow = const Color(0xFFFFFDE7);
 
   // Medal Colors
   final Color bronzeColor = const Color(0xFFCD7F32);
@@ -361,7 +354,6 @@ class _ProgressPageState extends State<ProgressPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildProgressCard(),
-
               const SizedBox(height: 13),
               const SizedBox(height: 20),
               _buildAchievementsSection(),

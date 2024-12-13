@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:passport_to_the_north/pages/location_details_screen.dart';
-import 'locations_screen.dart'; // Import the LocationDetailsScreen
 
 class QuestScreen extends StatelessWidget {
   const QuestScreen({super.key});
@@ -18,7 +17,7 @@ class QuestScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: const Color(0xFF4E342E),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

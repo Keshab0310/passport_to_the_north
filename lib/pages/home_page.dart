@@ -220,8 +220,8 @@ class _HomePageState extends State<HomePage> {
                 // Expandable Map Widget
                 Expanded(
                   child: MapWidget(
-                    initialCenter: mapCenter,
-                    initialZoom: 15.0,
+                    initialCenter: mapCenter!,
+                    initialZoom: 17.0,
                     markers: markers,
                     onTapMarker: _handleMarkerTap,
                   ),
