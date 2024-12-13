@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 
 class InitialMapWidget extends StatefulWidget {
   final LatLng? initialCenter;
@@ -22,45 +22,59 @@ class InitialMapWidget extends StatefulWidget {
 class _InitialMapWidgetState extends State<InitialMapWidget> {
   late LatLng _center;
   late double _zoom;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // Default to a fallback location if no initial center is provided
-    _center = widget.initialCenter ?? const LatLng(46.495633 , -80.9988953);
     _zoom = widget.initialZoom;
+    _getCurrentLocation();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    try {
+      LocationSettings locationSettings =const LocationSettings(
+        accuracy: LocationAccuracy.best,
+        distanceFilter: 10,
+      );
+      Position position = await Geolocator.getCurrentPosition(
+        locationSettings: locationSettings,
+      );
+
+      setState(() {
+        _center = LatLng(position.latitude, position.longitude);
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _center = widget.initialCenter ?? const LatLng(46.495633, -80.9988953);
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: ${e.toString()}")),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return FlutterMap(
       options: MapOptions(
         initialCenter: _center,
         initialZoom: _zoom,
-        minZoom: 9,
-        maxZoom: 18,
       ),
       children: [
         TileLayer(
           urlTemplate:
-          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+          "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}",
           additionalOptions: {
             'accessToken': widget.mapboxAccessToken,
           },
-          userAgentPackageName: 'com.example.passport_to_the_north',
-          tileBuilder: (context, exception, stackTrace) {
-            return Container(
-              color: Colors.red,
-              child: const Center(
-                child: Text(
-                  'Error loading map tile',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            );
-          },
         ),
-        // Attribution Widget (optional for Mapbox)
       ],
     );
   }
