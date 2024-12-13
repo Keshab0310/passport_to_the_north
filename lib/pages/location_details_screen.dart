@@ -156,62 +156,62 @@ class LocationDetailsScreen extends StatelessWidget {
       return [
         {
           'name': 'Afrofest Sudbury',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/afrofest_sudbury.jpg',
           'description': 'Celebrate Afro culture while enjoying live performances by local talent and shopping African inspired vendors.'},
         {
           'name': 'Blueberry Festival',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/blueberry_festival.jpg',
           'description': 'https://www.blueberryfestival.ca/'
         },
         {
           'name': 'Capreol Days',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/capreol_days_festival.jpg',
           'description': 'Capreol Downtown Part \n Capreol Days Vendors Market (over 50 vendors \nFood Vendor \nKids Activitie \nLive Music \nPancake Breakfast \nDuck Race\nCommunity BBQ\nInflatable Bouncy Castle\nBeer Garden'
         },
         {
           'name': 'Caruso Club – Società Caruso Italian Festival',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/italian_festival.jpg',
           'description': 'The Società Caruso\'s Italian Festival is an annual celebration of Italian culture where we encourage our community to come and experience the regional food, performances, music, and activities that we schedule throughout the weekend!'
         },
         {
           'name': 'Celebrate Canada Day',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/canada_day.png',
           'description': '3-day Canada Day celebration in the heart of Sudbury! Bell Park transforms into a vibrant hub of excitement, showcasing the best of Canadian culture, music, and community spirit.'
         },
         {
           'name': 'Cinéfest Sudbury International Film Festival',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/cinefest_festival.jpg',
           'description': 'Screening upwards of 125 films to over 34,000 attendees each year, Cinéfest Sudbury is one of Canada’s major film festivals. Recognized as The People’s Festival for the unparalleled access it provides visitors, Cinéfest offers the best in Canadian and international cinema'
         },{
           'name': 'Graphic-Con Sudbury',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/fgraphic_con.png',
           'description': 'Celebrate the contributions of comic books, graphic novels, film, and other media in our community with cosplay and comradery at this annual fan convention. SUDBURY COMMUNITY ARENA'},
         {
           'name': 'Greater Sudbury Earth Festival',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/fsudbury_earth_festival.png',
           'description': 'Greater Sudbury Earth Festival took place at Delki Dozzi Park. The day included vendors, children’s activities, and a chance to learn from community groups across Greater Sudbury!'
         },{
           'name': 'Northern Lights Festival Boréal',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/northern_lights_festival.jpg',
           'description': 'Outdoor music festival, Grace Hartman Amphiteatre'
         },{
           'name': 'Ribfest Sudbury',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/Ribfest_sudbury.png',
           'description': 'Annual community event is Northern Ontario\'s largest festival, bell park'
         },
         {
           'name': 'Spring Fling Fest',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/spring_fling.jpg',
           'description': 'Northern Ontario’s largest inflatable park comes to life at Spring Fling 2024, with over 20 unique attractions provided by A Maze N Fun Inc., including some of the largest available in Ontario, there is something for everyone to enjoy'
         },
         {
           'name': 'Sudbury Greek Festival',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/greek_festival.png',
           'description': 'Celebrate Greek heritage and culture in Sudbury with a weekend of authentic food and desserts, live music and traditional dancing, raffles, and tours of the beautiful St. Nicholas Greek Orthodox Church.)'
         },
         {
           'name': 'Sudbury Poutine Fest',
-          'image': 'assets/festival.jpg',
+          'image': 'assets/sudbury_poutine_fest.jpg',
           'description': 'Bell Park & Grace Hartman Amphitheatre'
         },
       ];
