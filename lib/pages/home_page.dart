@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
       if (permission == LocationPermission.whileInUse ||
           permission == LocationPermission.always) {
-        LocationSettings locationSettings =const LocationSettings(
+        LocationSettings locationSettings = const LocationSettings(
           accuracy: LocationAccuracy.best,
           distanceFilter: 10,
         );
@@ -73,51 +73,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Search Handler
-  void _handleSearch(String query) async {
-    if (query.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter a valid search query.')),
-      );
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      // Firestore Query to search for locations
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('locations') // Replace with your Firestore collection name
-          .where('name', isGreaterThanOrEqualTo: query)
-          .where('name', isLessThanOrEqualTo: '$query\uf8ff')
-          .get();
-
-      // Parse results and update markers
-      final newMarkers = querySnapshot.docs.map((doc) {
-        final data = doc.data();
-        return Marker(
-          point: LatLng(data['latitude'], data['longitude']),
-          child: const Icon(Icons.location_pin, color: Colors.blue, size: 40),
-        );
-      }).toList();
-
-      setState(() {
-        markers = newMarkers; // Update map markers
-        _isLoading = false;
-      });
-
-      if (newMarkers.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No matching locations found.')),
-        );
-      }
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-      _showErrorSnackBar('Error searching locations: ${e.toString()}');
-    }
+  void _handleSearch(String query) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Searching for $query...')),
+    );
   }
 
   // Marker Tap Handler
@@ -247,28 +206,28 @@ class _HomePageState extends State<HomePage> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
-        children: [
-          // Experience Progress Bar
-          ExpProgressBar(
-            currentExp: _currentUser.currentExp,
-            totalExp: _currentUser.totalExp,
-            league: _currentUser.league,
-          ),
+              children: [
+                // Experience Progress Bar
+                ExpProgressBar(
+                  currentExp: _currentUser.currentExp,
+                  totalExp: _currentUser.totalExp,
+                  league: _currentUser.league,
+                ),
 
-          // Search Box
-          SearchBox(onSearch: _handleSearch),
+                // Search Box
+                SearchBox(onSearch: _handleSearch),
 
-          // Expandable Map Widget
-          Expanded(
-            child: MapWidget(
-              initialCenter: mapCenter!,
-              initialZoom: 17.0,
-              markers: markers,
-              onTapMarker: _handleMarkerTap,
+                // Expandable Map Widget
+                Expanded(
+                  child: MapWidget(
+                    initialCenter: mapCenter,
+                    initialZoom: 15.0,
+                    markers: markers,
+                    onTapMarker: _handleMarkerTap,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
 
       // Floating Action Button for Navigation
       floatingActionButton: NavigateButton(
