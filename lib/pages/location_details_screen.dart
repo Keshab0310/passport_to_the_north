@@ -184,11 +184,11 @@ class LocationDetailsScreen extends StatelessWidget {
           'description': 'Screening upwards of 125 films to over 34,000 attendees each year, Cinéfest Sudbury is one of Canada’s major film festivals. Recognized as The People’s Festival for the unparalleled access it provides visitors, Cinéfest offers the best in Canadian and international cinema'
         },{
           'name': 'Graphic-Con Sudbury',
-          'image': 'assets/fgraphic_con.png',
+          'image': 'assets/graphic_con.png',
           'description': 'Celebrate the contributions of comic books, graphic novels, film, and other media in our community with cosplay and comradery at this annual fan convention. SUDBURY COMMUNITY ARENA'},
         {
           'name': 'Greater Sudbury Earth Festival',
-          'image': 'assets/fsudbury_earth_festival.png',
+          'image': 'assets/sudbury_earth_festival.png',
           'description': 'Greater Sudbury Earth Festival took place at Delki Dozzi Park. The day included vendors, children’s activities, and a chance to learn from community groups across Greater Sudbury!'
         },{
           'name': 'Northern Lights Festival Boréal',
