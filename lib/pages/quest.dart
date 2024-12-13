@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import 'package:passsport_to_the_north/location_details_screen.dart'; // Import the LocationDetailsScreen
+import 'package:northern_passport_to_the_north/location_details_screen.dart'; // Import the LocationDetailsScreen
 
 class QuestScreen extends StatelessWidget {
   const QuestScreen({super.key});
@@ -16,8 +17,14 @@ class QuestScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Categories'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text(
+          'Categories',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 32, color: Colors.white
+          ),
+        ),
+        backgroundColor: Colors.brown,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -34,13 +41,19 @@ class QuestScreen extends StatelessWidget {
                   height: 80,
                   fit: BoxFit.cover,
                 ),
-                title: Text(category['name']!),
+                title: Text(
+                  category['name']!,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16, // Bold category names
+                  ),
+                ),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LocationsScreen(
-                        category: category['name']!,
+                      builder: (context) => LocationDetailsScreen(
+                        categoryName: category['name']!,
                       ),
                     ),
                   );
