@@ -74,7 +74,7 @@ class _SearchPageState extends State<SearchPage> {
               child: CircularProgressIndicator(),
             )
                 : _searchResults.isEmpty
-                ? Center(
+                ? const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class InitialMapWidget extends StatefulWidget {
   final LatLng? initialCenter;
@@ -28,12 +29,36 @@ class _InitialMapWidgetState extends State<InitialMapWidget> {
   void initState() {
     super.initState();
     _zoom = widget.initialZoom;
-    _getCurrentLocation();
+    _initializeMapCenter();
   }
 
-  Future<void> _getCurrentLocation() async {
+  Future<void> _initializeMapCenter() async {
     try {
-      LocationSettings locationSettings =const LocationSettings(
+      // Query Firestore for a predefined location
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('locations')
+          .where('name', isEqualTo: 'Default Place') // Update name filter if needed
+          .limit(10)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final data = querySnapshot.docs.first.data();
+        setState(() {
+          _center = LatLng(data['latitude'], data['longitude']);
+          _isLoading = false;
+        });
+      } else {
+        // Fallback to device location if Firestore fails
+        await _getCurrentDeviceLocation();
+      }
+    } catch (e) {
+      await _getCurrentDeviceLocation(); // Handle errors
+    }
+  }
+
+  Future<void> _getCurrentDeviceLocation() async {
+    try {
+      LocationSettings locationSettings = const LocationSettings(
         accuracy: LocationAccuracy.best,
         distanceFilter: 10,
       );

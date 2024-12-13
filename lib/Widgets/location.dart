@@ -12,4 +12,3 @@ Future<void> addLocation(String name, double latitude, double longitude) async {
 }
 
 // Example usage
-addLocation( name = "Lake Laurentian Conservation Area", latitude = 46.451911347807325,  longitude = -80.94148877380907 },

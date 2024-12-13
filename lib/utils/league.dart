@@ -18,6 +18,18 @@ extension LeagueExtension on LeagueType {
     }
   }
 
+  // extension LeagueExtension on LeagueType {
+  // int get displayName {
+  //   switch (this) {
+  //     case LeagueType.bronze:
+  //       return 0;
+  //     case LeagueType.silver:
+  //       return 500;
+  //     case LeagueType.gold:
+  //       return 1000;
+  //   }
+  // }
+
   Color get color {
     switch (this) {
       case LeagueType.bronze:

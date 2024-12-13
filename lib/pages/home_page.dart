@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:passport_to_the_north/models/user_model.dart';
+import 'package:passport_to_the_north/utils/location_service.dart';
 import 'package:passport_to_the_north/widgets/exp_bar.dart';
 import 'package:passport_to_the_north/widgets/floating_action_button.dart';
 import 'package:passport_to_the_north/widgets/drawer_navigation.dart';
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _currentUser = widget.user;
     _getCurrentLocation();
+    uploadJsonToFirestore();
   }
 
   // Location Services Method
@@ -189,9 +191,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         backgroundColor: Colors.brown,
-        title: Text("${_currentUser.username}'s Exploration"),
+        title: Text("${_currentUser.username}'s Exploration", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -236,10 +239,11 @@ class _HomePageState extends State<HomePage> {
 
       // Drawer Navigation
       drawer: DrawerNavWithIndex(
-        username: _currentUser.username,
-        email: _currentUser.email,
+        // username: _currentUser.username,
+        // email: _currentUser.email,
         currentIndex: currentIndex,
         onItemSelected: _onItemSelected,
+        appUser: _currentUser,
       ),
     );
   }

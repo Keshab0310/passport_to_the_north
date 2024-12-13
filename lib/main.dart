@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Firebase App',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: LoginPage(), // Replace with your login page class

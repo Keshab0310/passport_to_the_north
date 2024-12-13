@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:passport_to_the_north/pages/quest.dart';
 import 'package:passport_to_the_north/pages/progress.dart';
 
+import '../models/user_model.dart';
+
 class DrawerNavWithIndex extends StatelessWidget {
-  final String username;
-  final String email;
+  // final String username;
+  // final String email;
+  final AppUser appUser;
   final int currentIndex;
   final Function(int) onItemSelected;
 
   const DrawerNavWithIndex({
     super.key,
-    required this.username,
-    required this.email,
+    // required this.username,
+    // required this.email,
     required this.currentIndex,
     required this.onItemSelected,
+    required this.appUser,
   });
 
   @override
@@ -32,17 +36,17 @@ class DrawerNavWithIndex extends StatelessWidget {
           children: <Widget>[
             UserAccountsDrawerHeader(
               accountName: Text(
-                username,
+                appUser.username,
                 style: const TextStyle(color: Colors.white),
               ),
               accountEmail: Text(
-                email,
+                appUser.email,
                 style: const TextStyle(color: Colors.white70),
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: const Color(0xFFF5AB99), // Light peach for contrast
                 child: Text(
-                  username.isNotEmpty ? username[0].toUpperCase() : '',
+                  appUser.username.isNotEmpty ? appUser.username[0].toUpperCase() : '',
                   style: const TextStyle(color: Color(0xFF4E342E)), // Match drawer background
                 ),
               ),
@@ -71,7 +75,7 @@ class DrawerNavWithIndex extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const QuestScreen()),
+                  MaterialPageRoute(builder: (context) =>  QuestScreen(appUser: appUser)),
                 );
               },
             ),
@@ -83,7 +87,7 @@ class DrawerNavWithIndex extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ProgressPage()),
+                  MaterialPageRoute(builder: (context) =>  const ProgressPage()),
                 );
               },
             ),

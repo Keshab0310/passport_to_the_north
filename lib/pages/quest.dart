@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:passport_to_the_north/models/user_model.dart';
 import 'package:passport_to_the_north/pages/location_details_screen.dart';
 
 class QuestScreen extends StatelessWidget {
-  const QuestScreen({super.key});
+  final AppUser appUser;
+  const QuestScreen({super.key, required this.appUser});
 
   @override
   Widget build(BuildContext context) {

@@ -17,7 +17,7 @@ class AppUser {
     required this.username,
     required this.email,
     this.currentExp = 0,
-    this.totalExp = 1000,
+    this.totalExp = 200,
     this.league = League.bronze,
   });
 
@@ -30,15 +30,15 @@ class AppUser {
         case League.bronze:
           if (currentExp >= 1000) {
             league = League.silver;
-            totalExp = 2000;
-            currentExp -= 1000;
+            // totalExp = 2000;
+            // currentExp -= 1000;
           }
           break;
         case League.silver:
           if (currentExp >= 2000) {
             league = League.gold;
-            totalExp = 3000;
-            currentExp -= 2000;
+            // totalExp = 3000;
+            // currentExp -= 2000;
           }
           break;
         case League.gold:

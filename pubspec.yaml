@@ -39,6 +39,7 @@ flutter:
     - assets/museum.jpg
     - assets/provincial_park.jpg
     - assets/tourist_attraction.jpg
+    - assets/data.json
 
   # If you want to add fonts, you can uncomment and modify the fonts section
   # fonts:
