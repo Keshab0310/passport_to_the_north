@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProgressPage extends StatefulWidget {
+  const ProgressPage({super.key});
+
   @override
   _ProgressPageState createState() => _ProgressPageState();
 }
@@ -17,10 +19,17 @@ class _ProgressPageState extends State<ProgressPage> {
   final Color lightBrown = Color(0xFFD7CCC8);
   final Color lightYellow = Color(0xFFFFFDE7);
 
+  final Color primaryGreen = const Color(0xFF2E8B57);
+  final Color primaryYellow = const Color(0xFFFFD600);
+  final Color primaryBrown = const Color(0xFF795548);
+  final Color accentBrown = const Color(0xFF8B4513);
+  final Color lightGreen = const Color(0xFF9E9D24);
+  final Color backgroundNeutral = const Color(0xFFFFF9C4);
+
   // Medal Colors
-  final Color bronzeColor = Color(0xFFCD7F32);
-  final Color silverColor = Color(0xFFC0C0C0);
-  final Color goldColor = Color(0xFFFFD700);
+  final Color bronzeColor = const Color(0xFFCD7F32);
+  final Color silverColor = const Color(0xFFC0C0C0);
+  final Color goldColor = const Color(0xFFFFD700);
 
   // User Progress Data (Mock)
   final Map<String, int> userProgress = {
@@ -93,7 +102,7 @@ class _ProgressPageState extends State<ProgressPage> {
                   ],
                 ),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),
@@ -277,7 +286,7 @@ class _ProgressPageState extends State<ProgressPage> {
               size: 30,
             ),
           ),
-          SizedBox(width: 15),
+          const SizedBox(width: 15),
 
           // Achievement Details
           Expanded(
@@ -340,7 +349,7 @@ class _ProgressPageState extends State<ProgressPage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.share),
+            icon: const Icon(Icons.share),
             onPressed: () => _launchURL('https://example.com/share'),
           )
         ],
@@ -352,7 +361,9 @@ class _ProgressPageState extends State<ProgressPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildProgressCard(),
+
               const SizedBox(height: 13),
+              const SizedBox(height: 20),
               _buildAchievementsSection(),
               const SizedBox(height: 13),
               _buildChallengesSection()
