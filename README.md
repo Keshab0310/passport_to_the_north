@@ -1,16 +1,5 @@
-# passport_to_the_north
+# Passport to The North
+A mobile application that blends exploration, gamification, and technonology to enhance travel experiences in Northern Ontario.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Project Overview
+Passport to The North is an innovative mobile application designed to boost tourism and promote cultural heritage in Northern Ontario. This app combines interactive maps, and a reward-based system to engage users in exploring the region. By integrating technology and gamification, the app offers an immersive experience that highlights hidden gems and supports the local economy.
