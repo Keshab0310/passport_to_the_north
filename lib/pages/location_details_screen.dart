@@ -116,11 +116,11 @@ class LocationDetailsScreen extends StatelessWidget {
     } else if (category == 'Tourist Attraction') {
       return [
         {'name': 'Science North',
-          'image': 'assets/tourist_attraction.jpg',
+          'image': 'assets/science_north.jpg',
           'description': 'most popular tourist attraction and an educational resource for children and adults across the globe. Science North maintains the second and eighth largest science centres in all of Canada and features an IMAX® with Laser theatre, digital Planetarium, butterfly gallery, special exhibits hall, and so much more'
         },
-        {'name': 'Great Wall of China',
-          'image': 'assets/tourist_attraction.jpg',
+        {'name': 'Dynamic Earth',
+          'image': 'assets/dynamic_earth.jpg',
           'description': 'Dynamic Earth, home of the Big Nickel, is an immersive, hands-on science centre that features earth science and mining experiences. Complete with a guided underground tour, multimedia theatres, engaging exhibits, and an outdoor science park, this iconic space entertains visitors of all ages in an interactive and educational setting.'
         },
       ];
