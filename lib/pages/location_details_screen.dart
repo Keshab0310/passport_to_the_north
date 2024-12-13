@@ -128,27 +128,27 @@ class LocationDetailsScreen extends StatelessWidget {
       return [
         {
           'name': 'Anderson Farm Museum',
-          'image': 'assets/museum.jpg',
+          'image': 'assets/anderson_farm_museum.jpg',
           'description': 'Explore Northern Ontario’s railroading, lumbering and mining history through engaging, educational and entertaining experiences. Operate a locomotive simulator, explore life on the railroad through the box car house and school on wheels, climb inside a historic locomotive and a caboose, and experience our massive model train layout and interactive programs.'
         },
         {
           'name': 'Art Gallery of Sudbury',
-          'image': 'assets/museum.jpg',
+          'image': 'assets/arts_gallery_of_sudbury.jpg',
           'description': 'Step back into the history of law enforcement in the Sudbury Region from 1883 to the present day.'
         },
         {
         'name': 'Flour Mill Museum',
-        'image': 'assets/museum.jpg',
+        'image': 'assets/flour_mill_museum.jpg',
         'description': 'Explore the century-old heritage buildings of a former dairy farm, once among the largest operating in Northern Ontario during the 1920s-1930s, and visit a log cabin originally from the ghost town of Creighton Mine'
         },
         {
           'name': 'Northern Ontario Railroad Museum & Heritage Centre',
-          'image': 'assets/museum.jpg',
+          'image': 'assets/northern_ontario_railroad_museum.jpg',
           'description': 'Explore Northern Ontario’s railroading, lumbering and mining history through engaging, educational and entertaining experiences. Operate a locomotive simulator, explore life on the railroad through the box car house and school on wheels, climb inside a historic locomotive and a caboose, and experience our massive model train layout and interactive programs.'
         },
         {
           'name': 'Sudbury Region Police Museum',
-          'image': 'assets/museum.jpg',
+          'image': 'assets/sudbury_regional_police_museum.jpg',
           'description': 'Step back into the history of law enforcement in the Sudbury Region from 1883 to the present day.'
         }
       ];
